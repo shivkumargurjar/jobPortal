@@ -8,6 +8,7 @@ export const Context = createContext({
 
 const AppWrapper = () => {
   const [isAuthorized, setIsAuthorized] = useState(false);
+  const [authChecked, setAuthChecked] = useState(false);
   const [user, setUser] = useState({});
 
   return (
@@ -15,6 +16,8 @@ const AppWrapper = () => {
       value={{
         isAuthorized,
         setIsAuthorized,
+        authChecked,
+        setAuthChecked,
         user,
         setUser,
       }}

@@ -29,6 +29,7 @@ const Register = () => {
         password,
       });
       toast.success(data.message);
+      setUser(data.user);
       setName("");
       setEmail("");
       setPassword("");

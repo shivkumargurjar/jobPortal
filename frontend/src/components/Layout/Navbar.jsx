@@ -8,18 +8,19 @@ import api from "../../api";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
-  const { isAuthorized, setIsAuthorized, user } = useContext(Context);
+  const { isAuthorized, setIsAuthorized, setUser, user } = useContext(Context);
   const navigateTo = useNavigate();
 
   const handleLogout = async () => {
     try {
       const response = await api.get("/user/logout");
       toast.success(response.data.message);
-      setIsAuthorized(false);
-      navigateTo("/login");
     } catch (error) {
-      toast.error(error.response.data.message), setIsAuthorized(true);
+      toast.error(error.response?.data?.message || "Logout failed");
     }
+    setIsAuthorized(false);
+    setUser({});
+    navigateTo("/login");
   };
 
   return (

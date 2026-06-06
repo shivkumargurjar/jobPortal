@@ -18,7 +18,7 @@ import MyJobs from "./components/Job/MyJobs";
 import api from "./api";
 
 const App = () => {
-  const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
+  const { setIsAuthorized, setUser, setAuthChecked } = useContext(Context);
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -28,9 +28,10 @@ const App = () => {
       } catch (error) {
         setIsAuthorized(false);
       }
+      setAuthChecked(true);
     };
     fetchUser();
-  }, [isAuthorized]);
+  }, []);
 
   return (
     <>
