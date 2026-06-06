@@ -44,10 +44,13 @@ export const login = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const logout = catchAsyncErrors(async (req, res, next) => {
+  const isProduction = process.env.NODE_ENV === "production";
   res
     .status(201)
     .cookie("token", "", {
       httpOnly: true,
+      sameSite: isProduction ? "none" : "lax",
+      secure: isProduction,
       expires: new Date(Date.now()),
     })
     .json({

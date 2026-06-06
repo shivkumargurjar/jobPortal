@@ -1,8 +1,8 @@
-import axios from "axios";
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../../main";
+import api from "../../api";
 
 const Application = () => {
   const [name, setName] = useState("");
@@ -71,16 +71,11 @@ const Application = () => {
     formData.append("jobId", id);
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:4000/api/v1/application/post",
-        formData,
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const { data } = await api.post("/application/post", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       setName("");
       setEmail("");
       setCoverLetter("");
